@@ -9,7 +9,7 @@ def home(request):
     else:
         movies = Movie.objects.all()
     
-    paginator = Paginator(movies, 10)  # 10 movies per page
+    paginator = Paginator(movies, 8)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
     

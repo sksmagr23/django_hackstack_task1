@@ -3,16 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MovieDB</title>
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.0.4/dist/tailwind.min.css" rel="stylesheet">
+    <title>{% block title %}Moviedb{% endblock %}</title>
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="bg-gray-100 text-gray-900">
-    <nav class="bg-blue-600 p-4 text-white">
-        <div class="container mx-auto">
-            <a href="{% url 'home' %}" class="text-lg font-semibold">MovieDB</a>
+<body class="bg-zinc-800 text-white font-serif">
+    <nav class="bg-black p-3 text-white">
+        <div class="container mx-auto flex justify-between items-center">
+            <h1 class="text-2xl font-semibold font-mono">MOVIEDB</h1>
+            <div class="text-orange-600 text-xl font-bold space-x-5">
+                <a href="{% url 'home' %}" class="hover:text-white">Home</a>
+                <a href="/admin/" class="hover:text-white">Admin</a>
+            </div>
         </div>
     </nav>
-    <div class="container mx-auto mt-4">
+    <div class="container mx-auto mt-5">
         {% block content %}
         {% endblock %}
     </div>
