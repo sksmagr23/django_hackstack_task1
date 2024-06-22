@@ -1,0 +1,16 @@
+{% extends 'movies/base.html' %}
+
+{% block content %}
+<div class="bg-white shadow-md rounded-lg overflow-hidden">
+    {% if movie.poster_image %}
+    <img src="{{ movie.poster_image.url }}" alt="{{ movie.title }}" class="w-full h-96 object-cover">
+    {% endif %}
+    <div class="p-4">
+        <h1 class="text-2xl font-bold">{{ movie.title }}</h1>
+        <p class="mt-2"><strong>Director:</strong> {{ movie.director }}</p>
+        <p class="mt-2"><strong>Release Date:</strong> {{ movie.release_date }}</p>
+        <p class="mt-2"><strong>Genre:</strong> {{ movie.genre }}</p>
+        <p class="mt-4">{{ movie.description }}</p>
+    </div>
+</div>
+{% endblock %}
