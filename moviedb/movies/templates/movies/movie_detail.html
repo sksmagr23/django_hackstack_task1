@@ -1,16 +1,24 @@
 {% extends 'movies/base.html' %}
-{% block title %}Moviedb-{{movie.title}}{% endblock %}
+{% block title %}
+  Moviedb-{{ movie.title }}
+{% endblock %}
 {% block content %}
-<div class="bg-blue-900 shadow-2xl rounded-xl overflow-hidden border-2 border-blue-950">
+  <div class="bg-blue-900 shadow-2xl rounded-xl overflow-hidden border-2 border-blue-950">
     {% if movie.poster_image %}
-    <img src="{{ movie.poster_image.url }}" alt="{{ movie.title }}" class="w-full h-96 object-cover">
+      <img src="{{ movie.poster_image.url }}" alt="{{ movie.title }}" class="w-full h-96 object-cover" />
     {% endif %}
     <div class="px-4 py-3 text-white">
-        <h1 class="text-4xl font-bold font-sans bg-orange-700 px-0 text-center">{{ movie.title }}</h1>
-        <p class="mt-4 font-mono text-xl"><strong class="text-yellow-400 mr-2">Director:</strong> {{ movie.director }}</p>
-        <p class="mt-2 font-mono text-xl"><strong class="text-yellow-400 mr-2">Release Date:</strong> {{ movie.release_date }}</p>
-        <p class="mt-2 font-mono text-xl"><strong class="text-yellow-400 mr-2">Genre:</strong> {{ movie.genre }}</p>
-        <p class="mt-4 font-mono text-sm">{{ movie.description }}</p>
+      <h1 class="text-4xl font-bold font-sans bg-orange-700 px-0 text-center">{{ movie.title }}</h1>
+      <p class="mt-4 font-mono text-xl">
+        <strong class="text-yellow-400 mr-2">Director:</strong> {{ movie.director }}
+      </p>
+      <p class="mt-2 font-mono text-xl">
+        <strong class="text-yellow-400 mr-2">Release Date:</strong> {{ movie.release_date }}
+      </p>
+      <p class="mt-2 font-mono text-xl">
+        <strong class="text-yellow-400 mr-2">Genre:</strong> {{ movie.genre }}
+      </p>
+      <p class="mt-4 font-mono text-sm">{{ movie.description }}</p>
     </div>
-</div>
+  </div>
 {% endblock %}

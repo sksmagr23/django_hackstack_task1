@@ -1,24 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}Moviedb{% endblock %}</title>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      {% block title %}
+        Moviedb
+      {% endblock %}
+    </title>
     <script src="https://cdn.tailwindcss.com"></script>
-</head>
-<body class="bg-blue-950 text-white font-serif">
+  </head>
+  <body class="bg-blue-950 text-white font-serif">
     <nav class="bg-black p-3 text-white">
-        <div class="container mx-auto flex justify-between items-center">
-            <h1 class="text-2xl font-mono text-blue-500">MOVIEDB</h1>
-            <div class="text-blue-400 text-xl font-mono font-semibold space-x-5">
-                <a href="{% url 'home' %}" class="hover:text-white transition-all duration-300 transform hover:scale-105">Home</a>
-                <a href="/admin/" class="hover:text-white transition-all duration-300 transform hover:scale-105">Admin</a>
-            </div>
+      <div class="container mx-auto flex justify-between items-center">
+        <h1 class="text-2xl font-mono text-blue-500">MOVIEDB</h1>
+        <div class="text-blue-400 text-xl font-mono font-semibold space-x-5">
+          <a href="{% url 'home' %}" class="hover:text-white transition-all duration-300 transform hover:scale-105">Home</a>
+          <a href="/admin/" class="hover:text-white transition-all duration-300 transform hover:scale-105">Admin</a>
         </div>
+      </div>
     </nav>
     <div class="container mx-auto mt-5">
-        {% block content %}
-        {% endblock %}
+      {% block content %}
+
+      {% endblock %}
     </div>
-</body>
+  </body>
 </html>

@@ -1,58 +1,84 @@
 {% extends 'movies/base.html' %}
 
-{% block title %}Moviedb-Home{% endblock %}
+{% block title %}
+  Moviedb-Home
+{% endblock %}
 
 {% block content %}
-<form method="get" class="mb-6">
-    <input type="text" name="q" value="{{ query }}" placeholder="Search..." class="bg-blue-950 p-2 border border-zinc-500 rounded-2xl w-full">
-</form>
-<div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-9">
+  <form method="get" class="mb-6">
+    <input type="text" name="q" value="{{ query }}" placeholder="Search..." class="bg-blue-950 p-2 border border-zinc-500 rounded-2xl w-full" />
+  </form>
+  <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-9">
     {% for movie in page_obj %}
-    <div class="bg-blue-900 hover:bg-blue-700 shadow-md rounded-3xl overflow-hidden transition-all duration-200 transform hover:scale-105 hover:border-white"
-    style="border: 1px solid transparent;">
+      <div class="bg-blue-900 hover:bg-blue-700 shadow-md rounded-3xl overflow-hidden transition-all duration-200 transform hover:scale-105 hover:border-white" style="border: 1px solid transparent;">
         <a href="{% url 'movie_detail' movie.pk %}">
-        {% if movie.poster_image %}
-        <img src="{{ movie.poster_image.url }}" alt="{{ movie.title }}" class="w-full h-48 object-cover">
-        {% endif %}
-        <div class="px-4 py-3">
+          {% if movie.poster_image %}
+            <img src="{{ movie.poster_image.url }}" alt="{{ movie.title }}" class="w-full h-48 object-cover" />
+          {% endif %}
+          <div class="px-4 py-3">
             <h2 class="text-lg font-serif font-extrabold hover:text-yellow-300">{{ movie.title }}</h2>
-        </div>
+          </div>
         </a>
-        </div>
+      </div>
+    {% endfor %}
+  </div>
+
+  <div class="mt-5">
+    <nav class="flex justify-center">
+      <ul class="inline-flex items-center -space-x-px">
+        {% if page_obj.has_previous %}
+          <li>
+            <a href="?{% if query %}
+                q={{ query }}&
+              {% endif %}page=1"
+              class="py-2 px-3 leading-tight text-gray-200 bg-zinc-700 hover:bg-zinc-600 mx-1">
+              First
+            </a>
+          </li>
+          <li>
+            <a href="?{% if query %}
+                q={{ query }}&
+              {% endif %}page={{ page_obj.previous_page_number }}"
+              class="py-2 px-3 leading-tight text-gray-200 bg-zinc-700 hover:bg-zinc-600 mx-1">
+              Previous
+            </a>
+          </li>
+        {% endif %}
+        {% for num in page_obj.paginator.page_range %}
+          {% if page_obj.number == num %}
+            <li>
+              <span class="py-2 mx-1 px-3 leading-tight text-gray-200 bg-gray-200 bg-zinc-700">{{ num }}</span>
+            </li>
+          {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+            <li>
+              <a href="?{% if query %}
+                  q={{ query }}&
+                {% endif %}page={{ num }}"
+                class="py-2 px-3 leading-tight text-gray-200 bg-zinc-700 hover:bg-zinc-600 mx-1">
+                {{ num }}
+              </a>
+            </li>
+          {% endif %}
         {% endfor %}
-    </div>
-    
-    <div class="mt-5">
-        <nav class="flex justify-center">
-            <ul class="inline-flex items-center -space-x-px">
-                {% if page_obj.has_previous %}
-                <li>
-                    <a href="?{% if query %}q={{ query }}&{% endif %}page=1" class="py-2 px-3 leading-tight text-gray-200 bg-zinc-700 hover:bg-zinc-600 mx-1">First</a>
-                </li>
-                <li>
-                    <a href="?{% if query %}q={{ query }}&{% endif %}page={{ page_obj.previous_page_number }}" class="py-2 px-3 leading-tight text-gray-200 bg-zinc-700 hover:bg-zinc-600 mx-1">Previous</a>
-                </li>
-                {% endif %}
-                {% for num in page_obj.paginator.page_range %}
-                    {% if page_obj.number == num %}
-                        <li>
-                            <span class="py-2 mx-1 px-3 leading-tight text-gray-200 bg-gray-200 bg-zinc-700">{{ num }}</span>
-                        </li>
-                    {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
-                        <li>
-                            <a href="?{% if query %}q={{ query }}&{% endif %}page={{ num }}" class="py-2 px-3 leading-tight text-gray-200 bg-zinc-700 hover:bg-zinc-600 mx-1">{{ num }}</a>
-                        </li>
-                    {% endif %}
-                {% endfor %}
-                {% if page_obj.has_next %}
-                <li>
-                    <a href="?{% if query %}q={{ query }}&{% endif %}page={{ page_obj.next_page_number }}" class="py-2 px-3 leading-tight text-gray-200 bg-zinc-700 hover:bg-zinc-600 mx-1">Next</a>
-                </li>
-                <li>
-                    <a href="?{% if query %}q={{ query }}&{% endif %}page={{ page_obj.paginator.num_pages }}" class="py-2 px-3 leading-tight text-gray-200 bg-zinc-700 hover:bg-zinc-600 mx-1">Last</a>
-                </li>
-                {% endif %}
-            </ul>
-        </nav>
-    </div>
+        {% if page_obj.has_next %}
+          <li>
+            <a href="?{% if query %}
+                q={{ query }}&
+              {% endif %}page={{ page_obj.next_page_number }}"
+              class="py-2 px-3 leading-tight text-gray-200 bg-zinc-700 hover:bg-zinc-600 mx-1">
+              Next
+            </a>
+          </li>
+          <li>
+            <a href="?{% if query %}
+                q={{ query }}&
+              {% endif %}page={{ page_obj.paginator.num_pages }}"
+              class="py-2 px-3 leading-tight text-gray-200 bg-zinc-700 hover:bg-zinc-600 mx-1">
+              Last
+            </a>
+          </li>
+        {% endif %}
+      </ul>
+    </nav>
+  </div>
 {% endblock %}
