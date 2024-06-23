@@ -4,17 +4,20 @@
 
 {% block content %}
 <form method="get" class="mb-6">
-    <input type="text" name="q" value="{{ query }}" placeholder="Search..." class="bg-zinc-800 p-2 border border-zinc-500 rounded-2xl w-full">
+    <input type="text" name="q" value="{{ query }}" placeholder="Search..." class="bg-blue-950 p-2 border border-zinc-500 rounded-2xl w-full">
 </form>
-<div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-8">
+<div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-9">
     {% for movie in page_obj %}
-    <div class="bg-zinc-700 shadow-md rounded-2xl overflow-hidden">
+    <div class="bg-blue-900 hover:bg-blue-700 shadow-md rounded-3xl overflow-hidden transition-all duration-200 transform hover:scale-105 hover:border-white"
+    style="border: 1px solid transparent;">
+        <a href="{% url 'movie_detail' movie.pk %}">
         {% if movie.poster_image %}
         <img src="{{ movie.poster_image.url }}" alt="{{ movie.title }}" class="w-full h-48 object-cover">
         {% endif %}
         <div class="px-4 py-3">
-            <h2 class="text-lg font-semibold hover:text-yellow-200"><a href="{% url 'movie_detail' movie.pk %}">{{ movie.title }}</a></h2>
+            <h2 class="text-lg font-serif font-extrabold hover:text-yellow-300">{{ movie.title }}</h2>
         </div>
+        </a>
         </div>
         {% endfor %}
     </div>
