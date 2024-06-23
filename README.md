@@ -9,6 +9,7 @@ It is a *django*-based web application used in movie data management. Users can 
 - Search functionality to filter movies by name/genre.
 - It also include Pagination for better UX.
 - The display contents fetches and added to pages as movie get added through admin interface through database.
+- The movie poster images are automatically added to movies folder as the movie is created.
 
 ## Installtion and usage
 1.  **Clone the repo:**
